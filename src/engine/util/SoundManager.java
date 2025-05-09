@@ -1,4 +1,4 @@
-package engine.audio;
+package engine.util;
 
 import engine.Configuration;
 
