@@ -10,4 +10,5 @@ public class Configuration {
     public static final long FRAME_TIME = 1000 / FPS;
 
     public static final String PATH_SOUNDS = "assets/sounds";
+    public static final String PATH_FONTS = "assets/fonts";
 }
