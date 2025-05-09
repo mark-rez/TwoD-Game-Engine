@@ -1,7 +1,6 @@
 package engine.core;
 
 import engine.Configuration;
-import engine.audio.SoundManager;
 import engine.graphics.EngineFrame;
 import engine.input.MouseManager;
 
