@@ -13,21 +13,34 @@ import java.util.List;
 public abstract class Engine extends JPanel implements Runnable {
     private boolean running = false;
     private final EngineFrame frame;
-    private List<EngineObject> objects = new ArrayList<>();
+
+    // List to hold layers, each layer is a List of EngineObjects
+    private final List<List<EngineObject>> layers = new ArrayList<>();
 
     public Engine() {
         this.setPreferredSize(new Dimension(Configuration.FRAME_WIDTH, Configuration.FRAME_HEIGHT));
         frame = new EngineFrame(this);
     }
 
+    public void addObject(EngineObject obj, int layer) {
+        // Ensure the layers list is large enough to hold the given layer
+        while (layers.size() <= layer) {
+            layers.add(new ArrayList<>());
+        }
+        layers.get(layer).add(obj);
+    }
+
     public void addObject(EngineObject obj) {
-        objects.add(obj);
+        addObject(obj, 0); // default to layer 0
     }
 
     public void removeObject(EngineObject obj) {
-        objects.remove(obj);
+        for (List<EngineObject> layer : layers) {
+            layer.remove(obj);
+        }
     }
 
+    // Method to start the game loop
     public void start() {
         running = true;
         Thread thread = new Thread(this);
@@ -56,11 +69,15 @@ public abstract class Engine extends JPanel implements Runnable {
         }
     }
 
+    @Override
     public void paint(Graphics g) {
         super.paintComponent(g); // clear background
 
-        for (EngineObject obj : objects) {
-            obj.render(g);
+        // Render objects layer by layer
+        for (List<EngineObject> layer : layers) {
+            for (EngineObject obj : layer) {
+                obj.render(g);
+            }
         }
     }
 
