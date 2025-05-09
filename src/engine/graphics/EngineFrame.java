@@ -2,6 +2,7 @@ package engine.graphics;
 
 import engine.Configuration;
 import engine.input.MouseManager;
+import engine.util.ImageManager;
 
 import javax.swing.*;
 
@@ -13,6 +14,9 @@ public class EngineFrame extends JFrame {
         setTitle(Configuration.FRAME_TITLE);
         setResizable(Configuration.FRAME_RESIZABLE);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        if (Configuration.FRAME_ICON_NAME != "") {
+            setIconImage(ImageManager.getImage(Configuration.FRAME_ICON_NAME));
+        }
 
         add(panel);
         pack();
