@@ -12,4 +12,5 @@ public class Configuration {
 
     public static final String PATH_SOUNDS = "assets/sounds";
     public static final String PATH_FONTS = "assets/fonts";
+    public static final String PATH_IMAGES = "assets/images";
 }
